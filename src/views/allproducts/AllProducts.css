@@ -1,0 +1,35 @@
+.product-list {
+  margin-left: 60px;
+  list-style: none;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-bottom: -20px;
+}
+.notfound_img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.product_list_text {
+  margin-bottom: 10px;
+}
+h3 {
+  margin-bottom: 10px;
+  margin-top: -5px;
+}
+
+.anim-appear {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.anim-appear-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 2000ms ease-in-out;
+}

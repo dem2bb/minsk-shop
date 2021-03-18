@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  /* background: radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #fedb37 0%,
+      #fdb931 8%,
+      #9f7928 30%,
+      #8a6e2f 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #ffffff 0%,
+      #ffffac 8%,
+      #d1b464 25%,
+      #5d4a1f 62.5%,
+      #5d4a1f 100%
+    ); */
+
+  background-color: #efefef;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.orderCont {
+  border-radius: 5px;
+  height: auto;
+  width: 180px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.orderButton {
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 30px;
+  margin: 10px 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  color: black;
+  transition: 0.2s ease-in-out;
+}
+.orderButton:before {
+  content: "";
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.5)
+  );
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -8px;
+  left: -75px;
+  transform: skewX(-45deg);
+}
+.orderButton:hover {
+  background: black;
+  color: #fff;
+}
+.orderButton:hover:before {
+  left: 150px;
+  transition: 0.5s ease-in-out;
+}
