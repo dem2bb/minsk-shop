@@ -1,4 +1,4 @@
-import { createAction, nanoid } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
 const addProduct = createAction('products/addProduct');
 

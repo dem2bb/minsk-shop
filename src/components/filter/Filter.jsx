@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeFilter } from '../../redux/products/products-actions';
 
-const Filter = ({ filter, changeFilter }) => {
+const Filter = ({ filter, handleFilter }) => {
   const onChangeFilter = event => {
-    changeFilter(event.target.value);
+    handleFilter(event.target.value);
   };
 
   return (
     <input
       type="text"
-      placeholder="insert product name"
+      placeholder="search product"
       value={filter}
       onChange={onChangeFilter}
     />
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  changeFilter,
+  handleFilter: changeFilter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
