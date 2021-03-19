@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AllProductsItemCont } from './AllProductsItemStyled';
+import { productsSelector } from '../../redux/products/products-selector';
 
 import './AllProducts.css';
 
@@ -84,7 +85,7 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-  productItems: state.products.productItems,
+  productItems: productsSelector(state),
 });
 
 const mapDispatchToProps = {
