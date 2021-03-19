@@ -4,7 +4,7 @@ import notFoundImg from '../../images/notfound.png';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getProducts } from '../../services/productsApi';
+// import { getProducts } from '../../services/productsApi';
 import Modal from '../modal/Modal.hoc';
 import { connect } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products-actions';
@@ -20,7 +20,6 @@ class ProductList extends Component {
 
   componentDidMount() {
     // getProducts().then(products => this.setState({ products }));
-
     this.props.getAllProductsOperation();
   }
 
