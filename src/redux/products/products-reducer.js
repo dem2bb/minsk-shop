@@ -3,6 +3,7 @@ import {
   addProduct,
   deleteProduct,
   getAllProducts,
+  changeFilter,
   setLoader,
 } from './products-actions';
 import { combineReducers } from 'redux';
@@ -20,7 +21,9 @@ const itemReducer = createReducer([], {
   ],
 });
 
-const filterReducer = createReducer('', {});
+const filterReducer = createReducer('', {
+  [changeFilter]: (_, { payload }) => payload,
+});
 
 const loaderReducer = createReducer(false, {
   [setLoader]: state => !state,
