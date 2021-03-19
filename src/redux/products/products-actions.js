@@ -8,4 +8,6 @@ const getAllProducts = createAction('product/getProducts');
 
 const deleteProduct = createAction('products/deleteProduct');
 
-export { addProduct, deleteProduct, getAllProducts, setLoader };
+const changeFilter = createAction('products/changeFilter');
+
+export { addProduct, deleteProduct, getAllProducts, setLoader, changeFilter };

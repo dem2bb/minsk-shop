@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   addProduct,
+  changeFilter,
   deleteProduct,
   getAllProducts,
   setLoader,
@@ -20,7 +21,9 @@ const itemReducer = createReducer([], {
   ],
 });
 
-const filterReducer = createReducer('', {});
+const filterReducer = createReducer('', {
+  [changeFilter]: (_, action) => action.payload,
+});
 
 const loaderReducer = createReducer(false, {
   [setLoader]: state => !state,
