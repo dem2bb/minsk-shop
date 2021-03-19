@@ -22,7 +22,7 @@ const itemReducer = createReducer([], {
 });
 
 const filterReducer = createReducer('', {
-  [changeFilter]: (_, action) => action.payload,
+  [changeFilter]: (_, { payload }) => payload,
 });
 
 const loaderReducer = createReducer(false, {
