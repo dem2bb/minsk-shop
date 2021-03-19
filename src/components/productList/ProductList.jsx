@@ -4,12 +4,13 @@ import notFoundImg from '../../images/notfound.png';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getProducts } from '../../services/productsApi';
+// import { getProducts } from '../../services/productsApi';
 import Modal from '../modal/Modal.hoc';
 import { connect } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products-actions';
 import { getAllProductsOperation } from '../../redux/products/products-operations';
 import Loader from 'react-loader-spinner';
+import Filter from '../filter/Filter';
 
 class ProductList extends Component {
   state = {
@@ -19,7 +20,6 @@ class ProductList extends Component {
 
   componentDidMount() {
     // getProducts().then(products => this.setState({ products }));
-
     this.props.getAllProductsOperation();
   }
 
@@ -61,6 +61,7 @@ class ProductList extends Component {
     } = this.state.currentProduct;
     return (
       <>
+        <Filter />
         {!this.props.loader ? (
           <ProductListCont>
             {products.map(
@@ -163,7 +164,9 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.productItems,
+  products: state.products.productItems.filter(product =>
+    product.name.toLowerCase().includes(state.products.filter.toLowerCase()),
+  ),
   loader: state.products.loader,
 });
 
