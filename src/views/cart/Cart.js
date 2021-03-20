@@ -10,8 +10,15 @@ import { CartListContainer } from './CartStyled';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { cartSelector } from '../../redux/cart/cart-selectors';
+import { createOrderOperation } from '../../redux/cart/cart-operations';
 
-const Cart = ({ cart, increment, decrement, removeFromCart }) => {
+const Cart = ({
+  cart,
+  increment,
+  decrement,
+  removeFromCart,
+  createOrderOperation,
+}) => {
   const onHandleClick = ({ currentTarget }) => {
     const { id } = currentTarget.closest('[data-id]').dataset;
     switch (currentTarget.name) {
@@ -24,6 +31,10 @@ const Cart = ({ cart, increment, decrement, removeFromCart }) => {
       default:
         return;
     }
+  };
+
+  const handleOrder = () => {
+    createOrderOperation(cart.map(({ id, quantity }) => ({ id, quantity })));
   };
 
   return (
@@ -84,7 +95,10 @@ const Cart = ({ cart, increment, decrement, removeFromCart }) => {
             acc += item.quantity * item.price;
             return acc;
           }, 0)}
-          $<button className="orderButton">Order</button>
+          $
+          <button className="orderButton" onClick={handleOrder}>
+            Order
+          </button>
         </p>
       )}
     </div>
@@ -99,6 +113,7 @@ const mapDispatchToProps = {
   increment,
   decrement,
   removeFromCart,
+  createOrderOperation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
