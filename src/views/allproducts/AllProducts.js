@@ -11,6 +11,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AllProductsItemCont } from './AllProductsItemStyled';
 
 import './AllProducts.css';
+import { allProductsSelector } from '../../redux/products/products-selector';
 
 class AllProducts extends Component {
   addProduct = event => {
@@ -84,7 +85,7 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-  productItems: state.products.productItems,
+  productItems: allProductsSelector(state),
 });
 
 const mapDispatchToProps = {
