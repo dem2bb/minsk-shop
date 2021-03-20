@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeFilter } from '../../redux/products/products-actions';
+import { filterSelector } from '../../redux/products/products-selectors';
 
 const Filter = ({ filter, handleChangeFilter }) => {
   const onChangeFilter = evt => {
@@ -19,7 +20,7 @@ const Filter = ({ filter, handleChangeFilter }) => {
 };
 
 const mapStateToProps = state => ({
-  filter: state.products.filter,
+  filter: filterSelector(state),
 });
 
 const mapDispatchToProps = {
