@@ -32,9 +32,21 @@ export const mainRoutes = [
     component: lazy(() => import('../views/cart/Cart')),
   },
   {
-    name: 'Settings',
-    path: '/settings',
+    name: 'Account',
+    path: '/account',
     exact: true,
     component: lazy(() => import('../views/settings/Settings')),
+  },
+  {
+    name: 'Signup',
+    path: '/signup',
+    exact: true,
+    component: lazy(() => import('../components/auth/AuthForm')),
+  },
+  {
+    name: 'Signin',
+    path: '/signin',
+    exact: true,
+    component: lazy(() => import('../components/auth/AuthForm')),
   },
 ];
