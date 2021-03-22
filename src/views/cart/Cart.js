@@ -1,28 +1,40 @@
-import React from "react";
-import { connect } from "react-redux";
-import notFoundImg from "../../images/notfound.png";
+import React from 'react';
+import { connect } from 'react-redux';
+import notFoundImg from '../../images/notfound.png';
 import {
   increment,
   decrement,
   removeFromCart,
-} from "../../redux/cart/cart-actions";
-import { CartListContainer } from "./CartStyled";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+} from '../../redux/cart/cart-actions';
+import { CartListContainer } from './CartStyled';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { cartSelector } from '../../redux/cart/cart-selector';
+import { createOrderOperation } from '../../redux/cart/cart-operation';
 
-const Cart = ({ cart, increment, decrement, removeFromCart }) => {
+const Cart = ({
+  cart,
+  increment,
+  decrement,
+  removeFromCart,
+  createOrderOperation,
+}) => {
   const onHandleClick = ({ currentTarget }) => {
-    const { id } = currentTarget.closest("[data-id]").dataset;
+    const { id } = currentTarget.closest('[data-id]').dataset;
     switch (currentTarget.name) {
-      case "increment":
+      case 'increment':
         return increment(id);
-      case "decrement":
+      case 'decrement':
         return decrement(id);
-      case "removeFromCart":
+      case 'removeFromCart':
         return removeFromCart(id);
       default:
         return;
     }
+  };
+
+  const handelOrder = () => {
+    createOrderOperation(cart.map(({ id, quantity }) => ({ id, quantity })));
   };
 
   return (
@@ -74,7 +86,7 @@ const Cart = ({ cart, increment, decrement, removeFromCart }) => {
                 <DeleteIcon />
               </IconButton>
             </li>
-          )
+          ),
         )}
       </CartListContainer>
       {!!cart.length && (
@@ -83,21 +95,25 @@ const Cart = ({ cart, increment, decrement, removeFromCart }) => {
             acc += item.quantity * item.price;
             return acc;
           }, 0)}
-          $<button className="orderButton">Order</button>
+          $
+          <button className="orderButton" onClick={handelOrder}>
+            Order
+          </button>
         </p>
       )}
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  cart: state.cart,
+const mapStateToProps = state => ({
+  cart: cartSelector(state),
 });
 
 const mapDispatchToProps = {
   increment,
   decrement,
   removeFromCart,
+  createOrderOperation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
