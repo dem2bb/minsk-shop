@@ -5,8 +5,14 @@ const Settings = () => {
   return (
     <div>
       <ThemeSwitcher.Consumer>
-        {toggleTheme => <button onClick={toggleTheme}>Change Theme</button>}
+        {toggleTheme => (
+          <button type="button" onClick={toggleTheme}>
+            Change Theme
+          </button>
+        )}
       </ThemeSwitcher.Consumer>
+
+      <button type="button">Log out </button>
     </div>
   );
 };
