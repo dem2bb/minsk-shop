@@ -6,3 +6,4 @@ const filteredProductsSelector = state =>
   );
 
 export { loaderSelector, filteredProductsSelector };
+

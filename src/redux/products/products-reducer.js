@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getAllProducts,
   setLoader,
+  changeFilter,
 } from './products-actions';
 import { combineReducers } from 'redux';
 
@@ -22,7 +23,7 @@ const itemReducer = createReducer([], {
 });
 
 const filterReducer = createReducer('', {
-  [changeFilter]: (_, {payload}) => payload,
+  [changeFilter]: (_, { payload }) => payload,
 });
 
 const loaderReducer = createReducer(false, {
