@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getAllProducts,
   setLoader,
+  changeFilter,
 } from './products-actions';
 import { combineReducers } from 'redux';
 
