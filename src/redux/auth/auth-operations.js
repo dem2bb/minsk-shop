@@ -7,7 +7,7 @@ const signUpOperation = user => async dispatch => {
       ...user,
       returnSecureToken: true,
     });
-    console.log(resonse.data);
+
     dispatch(signUp(resonse.data));
   } catch (error) {
     dispatch(setError(error.response.data.error.message));

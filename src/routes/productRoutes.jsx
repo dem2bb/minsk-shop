@@ -7,11 +7,13 @@ export const productRoutes = [
     path: "/list",
     name: "List",
     component: ProductList,
+    private:true,
   },
   {
     exact: true,
     path: "/form",
     name: "ADD PRODUCT",
     component: ProductForm,
+    private:true,
   },
 ];
