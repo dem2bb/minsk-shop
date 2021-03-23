@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { ThemeSwitcher } from '../../App';
+import { signOut } from '../../redux/auth/auth-action';
 
-const Settings = () => {
+const Settings = ({ signOut }) => {
   return (
     <div>
       <ThemeSwitcher.Consumer>
@@ -11,9 +13,15 @@ const Settings = () => {
           </button>
         )}
       </ThemeSwitcher.Consumer>
-      <button type="button">Log out</button>
+      <button type="button" onClick={() => signOut()}>
+        Log out
+      </button>
     </div>
   );
 };
 
-export default Settings;
+const mapDispatchToProps = {
+  signOut,
+};
+
+export default connect(null, mapDispatchToProps)(Settings);

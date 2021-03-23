@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {
+  signUpOperation,
+  signInOperation,
+} from '../../redux/auth/auth-operations';
+import { connect } from 'react-redux';
 
 class AuthForm extends Component {
   state = {
@@ -15,7 +20,9 @@ class AuthForm extends Component {
 
   onHandleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+    this.props.location.pathname === '/signup'
+      ? this.props.signUpOperation(this.state)
+      : this.props.signInOperation(this.state);
   };
 
   render() {
@@ -42,10 +49,17 @@ class AuthForm extends Component {
             onChange={this.onHandleChange}
           />
         </label>
-        <button type="submit"> Sign up</button>
+        <button type="submit">
+          {this.props.location.pathname === '/signup' ? 'Sign up' : 'Sign in'}
+        </button>
       </form>
     );
   }
 }
 
-export default AuthForm;
+const mapDispatchToProps = {
+  signUpOperation,
+  signInOperation,
+};
+
+export default connect(null, mapDispatchToProps)(AuthForm);
