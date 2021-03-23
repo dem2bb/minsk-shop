@@ -9,8 +9,13 @@ import {
 import { CartListContainer } from './CartStyled';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+<<<<<<< HEAD
 import { cartSelector } from '../../redux/cart/cart-selector';
 import { createOrderOperation } from '../../redux/cart/cart-operation';
+=======
+import { cartSelector } from '../../redux/cart/cart-selectors';
+import { createOrderOperation } from '../../redux/cart/cart-operations';
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
 
 const Cart = ({
   cart,
@@ -31,6 +36,9 @@ const Cart = ({
       default:
         return;
     }
+  };
+  const handleOrder = () => {
+    createOrderOperation(cart.map(({ id, quantity }) => ({ id, quantity })));
   };
 
   const handelOrder = () => {
@@ -96,7 +104,11 @@ const Cart = ({
             return acc;
           }, 0)}
           $
+<<<<<<< HEAD
           <button className="orderButton" onClick={handelOrder}>
+=======
+          <button className="orderButton" onClick={handleOrder}>
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
             Order
           </button>
         </p>

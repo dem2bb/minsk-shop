@@ -11,7 +11,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AllProductsItemCont } from './AllProductsItemStyled';
 
 import './AllProducts.css';
+<<<<<<< HEAD
 import { productsSelector } from '../../redux/products/products-selectors';
+=======
+import { allProductsSelector } from '../../redux/products/products-selector';
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
 
 class AllProducts extends Component {
   addProduct = event => {
@@ -85,7 +89,11 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
+<<<<<<< HEAD
   productItems: productsSelector(state),
+=======
+  productItems: allProductsSelector(state),
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
 });
 
 const mapDispatchToProps = {

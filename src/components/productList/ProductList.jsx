@@ -10,10 +10,14 @@ import { deleteProduct } from '../../redux/products/products-actions';
 import { getAllProductsOperation } from '../../redux/products/products-operations';
 import Loader from 'react-loader-spinner';
 import Filter from '../filter/Filter';
+<<<<<<< HEAD
 import {
   loaderSelector,
   filteredSelector,
 } from '../../redux/products/products-selectors';
+=======
+import { loaderSelector, filteredProductsSelector } from '../../redux/products/products-selector';
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
 
 class ProductList extends Component {
   state = {
@@ -155,9 +159,16 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
+<<<<<<< HEAD
   products: filteredSelector(state),
+=======
+  products: filteredProductsSelector(state),
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
   loader: loaderSelector(state),
 });
+
+
+
 
 export default connect(mapStateToProps, {
   deleteProduct,

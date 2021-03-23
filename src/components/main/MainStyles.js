@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainContainer = styled.main`
   background-color: ${props => props.theme.colors.background};
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   text-align: center;
-  padding: 50px 40px 0;
+  padding: 10px 40px 0;
 `;

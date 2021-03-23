@@ -4,6 +4,10 @@ import {
   INCREMENT,
   ORDER_PRODUCTS,
   REMOVE_FROM_CART,
+<<<<<<< HEAD
+=======
+  ORDER_PRODUCTS,
+>>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
 } from './cart-types';
 
 const addToCart = product => ({
