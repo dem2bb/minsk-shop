@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeFilter } from '../../redux/products/products-actions';
-import { filterSelector } from '../../redux/products/products-selector';
+import { filterSelector } from '../../redux/products/products-selectors';
 
 const Filter = ({ filter, handleFilter }) => {
   const onChangeFilter = event => handleFilter(event.target.value);

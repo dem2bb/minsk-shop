@@ -14,7 +14,7 @@ import Filter from '../filter/Filter';
 import {
   loaderSelector,
   filteredProductsSelector,
-} from '../../redux/products/products-selector';
+} from '../../redux/products/products-selectors';
 
 class ProductList extends Component {
   state = {

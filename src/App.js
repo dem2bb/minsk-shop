@@ -6,6 +6,8 @@ import light from './themes/lightTheme';
 import dark from './themes/darkTheme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './themes/globalStyles';
+import { connect } from 'react-redux';
+import { setIsAuth } from './redux/auth/auth-actions';
 
 export const ThemeSwitcher = createContext();
 
@@ -14,56 +16,14 @@ class App extends Component {
     theme: light,
   };
 
+  componentDidMount() {
+    this.props.token && this.props.setIsAuth(true);
+  }
+
   toggleTheme = () => {
     this.setState(prevState =>
       prevState.theme.title === 'light' ? { theme: dark } : { theme: light },
     );
-  };
-
-  addToCart = product => {
-    console.log(product);
-    if (this.state.cart.some(item => item.id === product.id)) {
-      this.setState(prevState => ({
-        cart: [
-          ...prevState.cart.map(item =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item,
-          ),
-        ],
-      }));
-      return;
-    }
-    this.setState(prevState => ({
-      cart: [...prevState.cart, { ...product, quantity: 1 }],
-    }));
-  };
-
-  deleteFromCart = productId => {
-    if (
-      this.state.cart.some(item => item.id === productId && item.quantity > 1)
-    ) {
-      this.setState(prevState => ({
-        cart: [
-          ...prevState.cart.map(item =>
-            item.id === productId
-              ? { ...item, quantity: item.quantity + 1 }
-              : item,
-          ),
-        ],
-      }));
-      return;
-    }
-    this.setState(prevState => ({
-      cart: [...prevState.cart.filter(({ id }) => id !== productId)],
-    }));
-  };
-
-  sendOrder = () => {
-    console.log('Order sent!');
-    this.setState({
-      cart: [],
-    });
   };
 
   render() {
@@ -75,12 +35,7 @@ class App extends Component {
           <div>
             <CssBaseline />
             <Header toggleTheme={this.toggleTheme} />
-            <Main
-              cart={cart}
-              addToCart={this.addToCart}
-              deleteFromCart={this.deleteFromCart}
-              sendOrder={this.sendOrder}
-            />
+            <Main />
           </div>
         </ThemeProvider>
       </ThemeSwitcher.Provider>
@@ -88,4 +43,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  token: state.auth.user.idToken,
+});
+
+const mapDispatchToProps = {
+  setIsAuth,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -11,7 +11,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AllProductsItemCont } from './AllProductsItemStyled';
 
 import './AllProducts.css';
-import { productsSelector } from '../../redux/products/products-selector';
+import { productsSelector } from '../../redux/products/products-selectors';
 
 class AllProducts extends Component {
   addProduct = event => {
