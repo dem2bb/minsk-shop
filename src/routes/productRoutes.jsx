@@ -1,19 +1,18 @@
-import ProductForm from '../components/productForm/ProductForm';
-import ProductList from '../components/productList/ProductList';
+import { lazy } from 'react';
 
 export const productRoutes = [
   {
     exact: true,
     path: '/list',
     name: 'List',
-    component: ProductList,
+    component: lazy(() => import('../components/productList/ProductList')),
     private: true,
   },
   {
     exact: true,
     path: '/form',
     name: 'ADD PRODUCT',
-    component: ProductForm,
+    component: lazy(() => import('../components/productForm/ProductForm')),
     private: true,
   },
 ];

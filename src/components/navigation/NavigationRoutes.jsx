@@ -9,16 +9,22 @@ import PrivateRoute from '../../routes/PrivateRoute';
 const NavigationRoutes = ({ routes, match = '' }) => {
   const isAuth = useSelector(getIsAuth);
   // const products = useSelector(productsSelector);
-  console.log(isAuth);
+  // console.log(isAuth);
   // console.log(products);
+  console.log('match :>> ', match);
 
   return (
     <Suspense
       fallback={<Loader type="Puff" color="#00BFFF" height={100} width={100} />}
     >
       <Switch>
-        {routes.map(item => (
-          <PrivateRoute {...item} match={match} key={item.path} />
+        {routes.map(({ exact, path, component }) => (
+          <Route
+            exact={exact}
+            path={`${match}${path}`}
+            component={component}
+            key={path}
+          />
         ))}
       </Switch>
     </Suspense>
