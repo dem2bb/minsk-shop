@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products-actions';
 import { getAllProductsOperation } from '../../redux/products/products-operations';
 import Loader from 'react-loader-spinner';
+import Filter from '../filter/Filter';
+import { loaderSelector, filteredSelector } from '../../redux/products/products-selectors';
 
 class ProductList extends Component {
   state = {
@@ -61,6 +63,7 @@ class ProductList extends Component {
     } = this.state.currentProduct;
     return (
       <>
+        <Filter></Filter>
         {!this.props.loader ? (
           <ProductListCont>
             {products.map(
@@ -163,11 +166,13 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.productItems,
-  loader: state.products.loader,
+  products: filteredSelector(state),
+  loader: loaderSelector(state),
 });
+
 
 export default connect(mapStateToProps, {
   deleteProduct,
   getAllProductsOperation,
 })(ProductList);
+
