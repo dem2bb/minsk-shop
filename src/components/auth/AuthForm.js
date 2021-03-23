@@ -46,8 +46,9 @@ class AuthForm extends Component {
             onChange={this.onHandleChange}
           />
         </label>
+
         <button type="submit">
-          {this.props.location.pathname === '/signup' ? 'Sign up' : 'Sign in'}
+          {this.props.location.pathname === '/signup' ? 'Sing up' : 'Sign in'}
         </button>
       </form>
     );

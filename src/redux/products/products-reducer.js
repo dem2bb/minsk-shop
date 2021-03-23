@@ -1,10 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   addProduct,
+  changeFilter,
   deleteProduct,
   getAllProducts,
   setLoader,
-  changeFilter,
 } from './products-actions';
 import { combineReducers } from 'redux';
 

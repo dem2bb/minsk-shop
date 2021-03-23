@@ -13,8 +13,9 @@ const Settings = ({ signOut }) => {
           </button>
         )}
       </ThemeSwitcher.Consumer>
+
       <button type="button" onClick={() => signOut()}>
-        Log out
+        Log out{' '}
       </button>
     </div>
   );

@@ -4,14 +4,17 @@ import notFoundImg from '../../images/notfound.png';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getProducts } from '../../services/productsApi';
+// import { getProducts } from '../../services/productsApi';
 import Modal from '../modal/Modal.hoc';
 import { connect } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products-actions';
 import { getAllProductsOperation } from '../../redux/products/products-operations';
 import Loader from 'react-loader-spinner';
 import Filter from '../filter/Filter';
-import { loaderSelector, filteredSelector } from '../../redux/products/products-selectors';
+import {
+  loaderSelector,
+  filteredProductsSelector,
+} from '../../redux/products/products-selectors';
 
 class ProductList extends Component {
   state = {
@@ -21,7 +24,6 @@ class ProductList extends Component {
 
   componentDidMount() {
     // getProducts().then(products => this.setState({ products }));
-
     this.props.getAllProductsOperation();
   }
 
@@ -63,7 +65,7 @@ class ProductList extends Component {
     } = this.state.currentProduct;
     return (
       <>
-        <Filter></Filter>
+        <Filter />
         {!this.props.loader ? (
           <ProductListCont>
             {products.map(
@@ -166,13 +168,11 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: filteredSelector(state),
+  products: filteredProductsSelector(state),
   loader: loaderSelector(state),
 });
-
 
 export default connect(mapStateToProps, {
   deleteProduct,
   getAllProductsOperation,
 })(ProductList);
-
