@@ -7,7 +7,7 @@ export const mainRoutes = [
     exact: true,
     component: lazy(() => import('../views/home/Home')),
     isPrivate: false,
-    restricted:false,
+    restricted: false,
   },
   {
     name: 'About',
@@ -15,8 +15,7 @@ export const mainRoutes = [
     exact: true,
     component: lazy(() => import('../views/about/AboutPage')),
     isPrivate: false,
-    restricted:false,
-
+    restricted: false,
   },
   {
     name: 'Admin',
@@ -24,9 +23,7 @@ export const mainRoutes = [
     exact: false,
     component: lazy(() => import('../views/products/Products')),
     isPrivate: true,
-    restricted:false,
-
-
+    restricted: false,
   },
   {
     name: 'AllProducts',
@@ -34,9 +31,7 @@ export const mainRoutes = [
     exact: false,
     component: lazy(() => import('../views/allproducts/AllProducts')),
     isPrivate: false,
-    restricted:false,
-
-
+    restricted: false,
   },
   {
     name: 'Cart',
@@ -44,9 +39,7 @@ export const mainRoutes = [
     exact: true,
     component: lazy(() => import('../views/cart/Cart')),
     isPrivate: false,
-    restricted:false,
-
-
+    restricted: false,
   },
   {
     name: 'Account',
@@ -54,26 +47,22 @@ export const mainRoutes = [
     exact: true,
     component: lazy(() => import('../views/settings/Settings')),
     isPrivate: true,
-    restricted:false,
-
-
+    restricted: false,
   },
   {
-    name: "Sign up",
-    path: "/signup",
+    name: 'Signup',
+    path: '/signup',
     exact: true,
-    component: lazy(()=>import('../components/auth/AuthForm')),
+    component: lazy(() => import('../components/auth/AuthForm')),
     isPrivate: false,
-    restricted:true,
-
+    restricted: true,
   },
   {
-    name: "Sign in",
-    path: "/signin",
+    name: 'Signin',
+    path: '/signin',
     exact: true,
-    component: lazy(()=>import('../components/auth/AuthForm')),
+    component: lazy(() => import('../components/auth/AuthForm')),
     isPrivate: false,
-    restricted:true,
-
-  }
+    restricted: true,
+  },
 ];

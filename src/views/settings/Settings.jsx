@@ -1,28 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ThemeSwitcher } from '../../App';
-import { signOut } from '../../redux/auth/auth-actions';
+import { signOut } from '../../redux/auth/auth-action';
 
-const Settings = ({signOut}) => {
+const Settings = ({ signOut }) => {
   return (
     <div>
       <ThemeSwitcher.Consumer>
-        {toggleTheme =>
-          <button
-            type="button"
-            onClick={toggleTheme}
-        >
-          Change Theme
-          </button>}
+        {toggleTheme => (
+          <button type="button" onClick={toggleTheme}>
+            Change Theme
+          </button>
+        )}
       </ThemeSwitcher.Consumer>
-      <button type="button" onClick={()=>signOut()} >Log out</button>
+      <button type="button" onClick={() => signOut()}>
+        Log out
+      </button>
     </div>
   );
 };
 
-
 const mapDispatchToProps = {
-  signOut
-}
+  signOut,
+};
 
-export default connect(null,mapDispatchToProps) (Settings);
+export default connect(null, mapDispatchToProps)(Settings);

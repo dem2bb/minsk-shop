@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import { addProduct } from '../../redux/products/products-actions';
-// import { addNewProduct } from '../../services/productsApi';
+import { addProduct } from '../../redux/products/products-actions';
+import { addNewProduct } from '../../services/productsApi';
 import { ProductFormContainer } from './productFormStyles';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { addNewProduct, getProducts } from '../../services/productsApi';
 import { addProduct, getAllProducts, setLoader } from './products-actions';
 

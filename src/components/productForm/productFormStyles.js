@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ProductFormContainer = styled.div`
   width: 300px;
-  margin: 20px auto 0 auto;
+  margin: 120px auto 0 auto;
   background-color: #fff;
   padding: 20px;
   border-radius: 25px;

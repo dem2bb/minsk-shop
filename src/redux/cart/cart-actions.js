@@ -2,8 +2,8 @@ import {
   ADD_TO_CART,
   DECREMENT,
   INCREMENT,
-  REMOVE_FROM_CART,
   ORDER_PRODUCTS,
+  REMOVE_FROM_CART,
 } from './cart-types';
 
 const addToCart = product => ({
