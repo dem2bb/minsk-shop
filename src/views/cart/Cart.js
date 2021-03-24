@@ -34,7 +34,9 @@ const Cart = ({
   };
 
   const handelOrder = () => {
-    createOrderOperation(cart.map(({ id, quantity }) => ({ id, quantity })));
+    createOrderOperation(
+      cart.map(({ id, name, quantity }) => ({ id, name, quantity })),
+    );
   };
 
   return (
