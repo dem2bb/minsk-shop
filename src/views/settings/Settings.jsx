@@ -7,15 +7,6 @@ const Settings = ({signOut}) => {
   return (
     <div>
       <ThemeSwitcher.Consumer>
-<<<<<<< HEAD
-        {toggleTheme => (
-          <button type="button" onClick={toggleTheme}>
-            Change Theme
-          </button>
-        )}
-      </ThemeSwitcher.Consumer>
-      <button type="button">Log out</button>
-=======
         {toggleTheme =>
           <button
             type="button"
@@ -25,7 +16,6 @@ const Settings = ({signOut}) => {
           </button>}
       </ThemeSwitcher.Consumer>
       <button type="button" onClick={()=>signOut()} >Log out</button>
->>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
     </div>
   );
 };

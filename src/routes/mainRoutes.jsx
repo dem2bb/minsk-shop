@@ -45,7 +45,6 @@ export const mainRoutes = [
 
   },
   {
-<<<<<<< HEAD
     name: 'Account',
     path: '/account',
     exact: true,
@@ -63,12 +62,4 @@ export const mainRoutes = [
     exact: true,
     component: lazy(() => import('../components/auth/AuthForm')),
   },
-=======
-    name: "Sign in",
-    path: "/signin",
-    exact: true,
-    component: lazy(()=>import('../components/auth/AuthForm'))
-
-  }
->>>>>>> 9a9da18f8bb08a5a3e7cfc2afd2fa00cc1820eb8
 ];
