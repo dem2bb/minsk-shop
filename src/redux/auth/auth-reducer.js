@@ -1,12 +1,21 @@
 import { combineReducers, createReducer } from '@reduxjs/toolkit';
-import { signIn, signUp, setError, resetError, signOut } from './auth-action';
+import {
+  signIn,
+  signUp,
+  setError,
+  resetError,
+  signOut,
+  setIsAuth,
+} from './auth-action';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const user = createReducer(
   {},
   {
     [signUp]: (_, { payload }) => payload,
     [signIn]: (_, { payload }) => payload,
-    [signOut]: (_, { payload }) => ({}),
+    [signOut]: () => ({}),
   },
 );
 
@@ -14,6 +23,7 @@ const isAuth = createReducer(false, {
   [signUp]: () => true,
   [signIn]: () => true,
   [signOut]: () => false,
+  [setIsAuth]: (_, { payload }) => payload,
 });
 
 const error = createReducer('', {
@@ -21,8 +31,16 @@ const error = createReducer('', {
   [resetError]: () => '',
 });
 
+const persistConfig = {
+  key: 'user',
+  storage,
+  whitelist: ['idToken', 'refreshToken', 'email', 'localId'],
+};
+
+const persistedReducer = persistReducer(persistConfig, user);
+
 const authReducer = combineReducers({
-  user,
+  user: persistedReducer,
   error,
   isAuth,
 });
