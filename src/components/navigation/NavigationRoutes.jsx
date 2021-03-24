@@ -4,6 +4,7 @@ import {useSelector} from "react-redux"
 import Loader from "react-loader-spinner";
 import { getIsAuth } from "../../redux/auth/auth-selectors";
 import PrivateRoute from "../../routes/PrivateRoute";
+import PublicRoute from "../../routes/PublicRoute";
 
 // import { allProductsSelector } from "../../redux/products/products-selector";
 
@@ -18,7 +19,8 @@ const isAuth = useSelector(getIsAuth)
     >
       <Switch>
         {routes.map((item) => (
-          <PrivateRoute key={item.path} {...item} match={match} />
+          item.isPrivate ? (<PrivateRoute {...item} key={item.path}/> )
+            : (< PublicRoute {...item} key={item.path}/> ) 
 
         ))}
       </Switch>

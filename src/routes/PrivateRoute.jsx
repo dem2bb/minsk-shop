@@ -1,18 +1,22 @@
-import React from 'react';
-import { Route, useRouteMatch } from 'react-router-dom';
+import { Redirect, Route, } from 'react-router-dom';
+import {useSelector} from "react-redux"
+import { getIsAuth } from '../redux/auth/auth-selectors';
 
-const PrivateRoute = ({ exact, path, component }) => {
-  const match = useRouteMatch();
-  console.log(match);
+const PrivateRoute = ({ exact, path, component, }) => {
 
+
+
+  const isAuth = useSelector(getIsAuth)
   return (
     <>
+      {isAuth?
       <Route
         exact={exact}
-        path={`${match}${path}`}
+        path={`${path}`}
         component={component}
         key={path}
-      />
+        />
+    :<Redirect to="/signin"/>}
     </>
   );
 };
