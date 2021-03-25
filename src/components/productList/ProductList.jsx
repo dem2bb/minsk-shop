@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { ProductListCont } from './ProductStyles';
 import notFoundImg from '../../images/notfound.png';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from '../modal/Modal.hoc';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { deleteProduct } from '../../redux/products/products-actions';
 import { getAllProductsOperation } from '../../redux/products/products-operations';
 import Loader from 'react-loader-spinner';
@@ -15,51 +16,53 @@ import {
   filteredSelector,
 } from '../../redux/products/products-selectors';
 
-class ProductList extends Component {
-  state = {
-    currentProduct: {},
-    isModalOpen: false,
-  };
+const ProductList =()=> {
+  const [currentProduct, setCurrentProduct] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  componentDidMount() {
-    this.props.getAllProductsOperation();
-  }
+  const dispatch = useDispatch();
 
-  onDelete = event => {
+  const products = useSelector(filteredSelector);
+  const loader = useSelector(loaderSelector)
+
+  useEffect(() => {
+    dispatch(getAllProductsOperation());
+   
+  }, [])
+
+
+  const onDelete = event => {
     const { id } = event.currentTarget.dataset;
-    this.props.deleteProduct(id);
-    this.onClose();
+    dispatch(deleteProduct(id));
+    onClose();
   };
 
-  onOpenModal = event => {
+  const onOpenModal = event => {
     const { id } = event.target.dataset;
-    this.setState({
-      isModalOpen: true,
-      currentProduct: this.props.products.find(product => product.id === id),
-    });
+
+    setCurrentProduct(products.find(product => product.id === id))
+    setIsModalOpen(true)
   };
 
-  onClose = () => {
-    this.setState({
-      isModalOpen: false,
-    });
+  const onClose = () => {
+     setIsModalOpen(false)
   };
 
-  render() {
-    const { products } = this.props;
-    const {
-      avatar,
-      name,
-      price,
-      sale,
-      description,
-      category,
-      id,
-    } = this.state.currentProduct;
+ 
+    // const { products } = this.props;
+    // const {
+    //   avatar,
+    //   name,
+    //   price,
+    //   sale,
+    //   description,
+    //   category,
+    //   id,
+    // } = this.state.currentProduct;
     return (
       <>
-        <Filter></Filter>
-        {!this.props.loader ? (
+        <Filter/>
+        {!loader ? (
           <ProductListCont>
             {products.map(
               ({ category, description, id, name, price, sale, avatar }) => {
@@ -88,13 +91,13 @@ class ProductList extends Component {
                         aria-label="delete"
                         color="primary"
                         data-id={id}
-                        onClick={this.onDelete}
+                        onClick={onDelete}
                       >
                         <DeleteIcon />
                       </IconButton>
                       <button
                         type="button"
-                        onClick={this.onOpenModal}
+                        onClick={onOpenModal}
                         data-id={id}
                       >
                         Details
@@ -114,25 +117,25 @@ class ProductList extends Component {
             timeout={3000} //3 secs
           />
         )}
-        {this.state.isModalOpen && (
-          <Modal onClose={this.onClose} isOpen={this.state.isModalOpen}>
+        {isModalOpen && (
+          <Modal onClose={onClose} isOpen={isModalOpen}>
             <img
               className="notfound_img"
-              src={avatar ? avatar : notFoundImg}
-              alt={name}
+              src={currentProduct.avatar ? currentProduct.avatar : notFoundImg}
+              alt={currentProduct.name}
             />
-            <h3>{name}</h3>
+            <h3>{currentProduct.name}</h3>
             <p className="product_list_text">
-              <b>Price:</b> {price}
+              <b>Price:</b> {currentProduct.price}
             </p>
             <p className="product_list_text">
-              <b>Description:</b> {description}
+              <b>Description:</b> {currentProduct.description}
             </p>
             <p className="product_list_text">
-              <b>Sale:</b> {sale ? 'Enabled' : 'Disabled'}
+              <b>Sale:</b> {currentProduct.sale ? 'Enabled' : 'Disabled'}
             </p>
             <p className="product_list_text">
-              <b>Category:</b> {category}
+              <b>Category:</b> {currentProduct.category}
             </p>
             <div className="buttons">
               <IconButton color="primary" aria-label="add to shopping cart">
@@ -141,8 +144,8 @@ class ProductList extends Component {
               <IconButton
                 aria-label="delete"
                 color="primary"
-                data-id={id}
-                onClick={this.onDelete}
+                data-id={currentProduct.id}
+                onClick={onDelete}
               >
                 <DeleteIcon />
               </IconButton>
@@ -152,14 +155,7 @@ class ProductList extends Component {
       </>
     );
   }
-}
 
-const mapStateToProps = state => ({
-  products: filteredSelector(state),
-  loader: loaderSelector(state),
-});
 
-export default connect(mapStateToProps, {
-  deleteProduct,
-  getAllProductsOperation,
-})(ProductList);
+
+export default ProductList;

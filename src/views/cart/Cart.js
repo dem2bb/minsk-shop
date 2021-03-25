@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import notFoundImg from '../../images/notfound.png';
 import {
   increment,
@@ -12,29 +12,32 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { cartSelector } from '../../redux/cart/cart-selector';
 import { createOrderOperation } from '../../redux/cart/cart-operation';
 
-const Cart = ({
-  cart,
-  increment,
-  decrement,
-  removeFromCart,
-  createOrderOperation,
-}) => {
+const Cart = () => {
+  const cart = useSelector(cartSelector);
+
+  const dispatch = useDispatch();
+
+  // cart: cartSelector(state);
+
+  //======
   const onHandleClick = ({ currentTarget }) => {
     const { id } = currentTarget.closest('[data-id]').dataset;
     switch (currentTarget.name) {
       case 'increment':
-        return increment(id);
+        return dispatch(increment(id));
       case 'decrement':
-        return decrement(id);
+        return dispatch(decrement(id));
       case 'removeFromCart':
-        return removeFromCart(id);
+        return dispatch(removeFromCart(id));
       default:
         return;
     }
   };
 
   const handelOrder = () => {
-    createOrderOperation(cart.map(({ id, quantity }) => ({ id, quantity })));
+    dispatch(
+      createOrderOperation(cart.map(({ id, quantity }) => ({ id, quantity }))),
+    );
   };
 
   return (
@@ -105,15 +108,15 @@ const Cart = ({
   );
 };
 
-const mapStateToProps = state => ({
-  cart: cartSelector(state),
-});
+// const mapStateToProps = state => ({
+//   cart: cartSelector(state),
+// });
 
-const mapDispatchToProps = {
-  increment,
-  decrement,
-  removeFromCart,
-  createOrderOperation,
-};
+// const mapDispatchToProps = {
+//   increment,
+//   decrement,
+//   removeFromCart,
+//   createOrderOperation,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default Cart;

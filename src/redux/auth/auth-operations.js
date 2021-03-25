@@ -3,14 +3,15 @@ import { setError, signIn, signUp } from './auth-action';
 
 export const signUpOperation = user => async dispatch => {
   try {
-    const response = await axios.post(process.env.REACT_APP_SIGNUP_URL, {
+    const response = await axios.post(process.env.REACT_APP_SINGUP_URL, {
       ...user,
       returnSecureToken: true,
     });
     dispatch(signUp(response.data));
   } catch (error) {
-    dispatch(setError(error.response.data.error.message));
+    dispatch(setError(error));
   }
+  // error.response.data.error.message
 };
 
 export const signInOperation = user => async dispatch => {
@@ -21,6 +22,7 @@ export const signInOperation = user => async dispatch => {
     });
     dispatch(signIn(response.data));
   } catch (error) {
-    dispatch(setError(error.response.data.error.message));
+    dispatch(setError(error));
   }
+  // error.response.data.error.message;
 };

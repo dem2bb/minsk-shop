@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import { addProduct } from '../../redux/products/products-actions';
 import { addNewProduct } from '../../services/productsApi';
 import { ProductFormContainer } from './productFormStyles';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import './animation.css';
 import { addProductOperation } from '../../redux/products/products-operations';
@@ -26,30 +26,33 @@ const initialState = {
   category: categories[0],
 };
 
-class ProductForm extends Component {
-  state = {
-    ...initialState,
-  };
 
-  onHandleChange = e => {
+const ProductForm = () => {
+
+  const [state, setState] = useState(initialState);
+
+  const dispatch= useDispatch()
+
+  const onHandleChange = e => {
     if (e.target.type === 'file') {
-      toDataUrl(e.target).then(avatar => this.setState({ avatar }));
-      console.dir(e.target);
+      toDataUrl(e.target).then(avatar =>setState(prevState=>({...prevState, avatar})));
       return;
     }
     if (e.target.type === 'checkbox') {
-      this.setState(prevState => ({
+      setState(prevState => ({
+        ...prevState,
         sale: !prevState.sale,
       }));
       return;
     }
     const { name, value } = e.target;
-    this.setState({
+    setState(prevState=>({
+      ...prevState,
       [name]: value,
-    });
+    }));
   };
 
-  onHandleSubmit = e => {
+  const onHandleSubmit = e => {
     e.preventDefault();
     // addNewProduct(this.state);
     // this.setState({
@@ -58,21 +61,21 @@ class ProductForm extends Component {
     this.props.addProductOperation(this.state);
   };
 
-  render() {
-    const { name, price, category, description } = this.state;
-    return (
+
+
+   return (
       <CSSTransition in={true} appear timeout={2000} classNames="animation">
         <ProductFormContainer>
           <>
             <h2>Products Form</h2>
-            <form onSubmit={this.onHandleSubmit}>
+            <form onSubmit={onHandleSubmit}>
               <label>
                 Name:
                 <input
                   type="text"
                   name="name"
-                  onChange={this.onHandleChange}
-                  value={name}
+                  onChange={onHandleChange}
+                  value={state.name}
                 />
               </label>
               <label>
@@ -80,8 +83,8 @@ class ProductForm extends Component {
                 <input
                   type="text"
                   name="price"
-                  onChange={this.onHandleChange}
-                  value={price}
+                  onChange={onHandleChange}
+                  value={state.price}
                 />
               </label>
               <label htmlFor="file">Avatar</label>
@@ -90,15 +93,15 @@ class ProductForm extends Component {
                 id="file"
                 name="avatar"
                 className="inputfile"
-                onChange={this.onHandleChange}
+                onChange={onHandleChange}
               />
               <label>
                 Description:
                 <textarea
                   type="text"
                   name="description"
-                  onChange={this.onHandleChange}
-                  value={description}
+                  onChange={onHandleChange}
+                  value={state.description}
                 />
               </label>
               <div className="options">
@@ -106,8 +109,8 @@ class ProductForm extends Component {
                   Category:
                   <select
                     name="category"
-                    onChange={this.onHandleChange}
-                    value={category}
+                    onChange={onHandleChange}
+                    value={state.category}
                   >
                     {categories.map(category => (
                       <option key={category} value={category}>
@@ -121,8 +124,8 @@ class ProductForm extends Component {
                   <input
                     type="checkbox"
                     name="sale"
-                    checked={this.state.sale}
-                    onChange={this.onHandleChange}
+                    checked={state.sale}
+                    onChange={onHandleChange}
                   />
                 </label>
               </div>
@@ -134,7 +137,121 @@ class ProductForm extends Component {
         </ProductFormContainer>
       </CSSTransition>
     );
-  }
 }
 
-export default connect(null, { addProductOperation })(ProductForm);
+export default ProductForm
+
+
+
+// class ProductForm extends Component {
+//   state = {
+//     ...initialState,
+//   };
+
+//   onHandleChange = e => {
+//     if (e.target.type === 'file') {
+//       toDataUrl(e.target).then(avatar => this.setState({ avatar }));
+//       console.dir(e.target);
+//       return;
+//     }
+//     if (e.target.type === 'checkbox') {
+//       this.setState(prevState => ({
+//         sale: !prevState.sale,
+//       }));
+//       return;
+//     }
+//     const { name, value } = e.target;
+//     this.setState({
+//       [name]: value,
+//     });
+//   };
+
+//   onHandleSubmit = e => {
+//     e.preventDefault();
+//     // addNewProduct(this.state);
+//     // this.setState({
+//     //   ...initialState,
+//     // });
+//     this.props.addProductOperation(this.state);
+//   };
+
+//   render() {
+//     const { name, price, category, description } = this.state;
+//     return (
+//       <CSSTransition in={true} appear timeout={2000} classNames="animation">
+//         <ProductFormContainer>
+//           <>
+//             <h2>Products Form</h2>
+//             <form onSubmit={this.onHandleSubmit}>
+//               <label>
+//                 Name:
+//                 <input
+//                   type="text"
+//                   name="name"
+//                   onChange={this.onHandleChange}
+//                   value={name}
+//                 />
+//               </label>
+//               <label>
+//                 Price:
+//                 <input
+//                   type="text"
+//                   name="price"
+//                   onChange={this.onHandleChange}
+//                   value={price}
+//                 />
+//               </label>
+//               <label htmlFor="file">Avatar</label>
+//               <input
+//                 type="file"
+//                 id="file"
+//                 name="avatar"
+//                 className="inputfile"
+//                 onChange={this.onHandleChange}
+//               />
+//               <label>
+//                 Description:
+//                 <textarea
+//                   type="text"
+//                   name="description"
+//                   onChange={this.onHandleChange}
+//                   value={description}
+//                 />
+//               </label>
+//               <div className="options">
+//                 <label>
+//                   Category:
+//                   <select
+//                     name="category"
+//                     onChange={this.onHandleChange}
+//                     value={category}
+//                   >
+//                     {categories.map(category => (
+//                       <option key={category} value={category}>
+//                         {category}
+//                       </option>
+//                     ))}
+//                   </select>
+//                 </label>
+//                 <label>
+//                   Sale:
+//                   <input
+//                     type="checkbox"
+//                     name="sale"
+//                     checked={this.state.sale}
+//                     onChange={this.onHandleChange}
+//                   />
+//                 </label>
+//               </div>
+//               <button type="submit" className="button-3">
+//                 Add product
+//               </button>
+//             </form>
+//           </>
+//         </ProductFormContainer>
+//       </CSSTransition>
+//     );
+//   }
+// }
+
+// export default connect(null, { addProductOperation })(ProductForm);

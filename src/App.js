@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -6,48 +6,39 @@ import light from './themes/lightTheme';
 import dark from './themes/darkTheme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './themes/globalStyles';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setIsAuth } from './redux/auth/auth-action';
+import useTheme from './hooks/useTheme';
 
-export const ThemeSwitcher = createContext();
+const App = () => {
+  //   state = {
+  //     theme: light,
+  //   };
+  const [theme, toggleTheme] = useTheme();
 
-class App extends Component {
-  state = {
-    theme: light,
-  };
+  // const [theme, setTheme] = useState(light);
+  const token = useSelector(state => state.auth.user.idToken);
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    this.props.token && this.props.setIsAuth(true);
-  }
+  useEffect(() => {
+    token && dispatch(setIsAuth(true));
+  }, []);
 
-  toggleTheme = () => {
-    this.setState(prevState =>
-      prevState.theme.title === 'light' ? { theme: dark } : { theme: light },
-    );
-  };
-  render() {
-    const { cart, theme } = this.state;
-    return (
-      <ThemeSwitcher.Provider value={this.toggleTheme}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <div>
-            <CssBaseline />
-            <Header toggleTheme={this.toggleTheme} />
-            <Main />
-          </div>
-        </ThemeProvider>
-      </ThemeSwitcher.Provider>
-    );
-  }
-}
+  // const toggleTheme = () => {
+  //   setTheme(prevTheme => (prevTheme.title === 'light' ? dark : light));
+  // };
 
-const mapStateToProps = state => ({
-  token: state.auth.user.idToken,
-});
-
-const mapDispatchToProps = {
-  setIsAuth,
+  // const { cart, theme } = this.state;
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <div>
+        <CssBaseline />
+        <Header toggleTheme={toggleTheme} />
+        <Main />
+      </div>
+    </ThemeProvider>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
