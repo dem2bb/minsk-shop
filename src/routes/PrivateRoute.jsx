@@ -1,38 +1,19 @@
+import {useSelector} from 'react-redux';
+
+
 import React from 'react';
-import { Route, useRouteMatch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-const PrivateRoute = ({ exact, path, component, match = '' }) => {
-  // const match = useRouteMatch();
-  console.log('match', match);
-
+const PrivateRoute = ({ exact, path, component, restricted }) => {
   return (
     <>
-      <Route
-        exact={exact}
-        path={`${match}${path}`}
-        component={component}
-        key={path}
-      />
+      {isAuth
+        ? (<Route exact={exact} path={`${path}`} component={component} key={path} />)
+        : (<Redirect to="/signin" />)
+
+      
     </>
   );
 };
 
 export default PrivateRoute;
-
-// const PrivateRoute = ({ exact, path, component: MyComponent }) => {
-//   const match = useRouteMatch('');
-//   // console.log(match);
-
-//   return (
-//     <>
-//       <Route
-//         exact={exact}
-//         path={`${match}${path}`}
-//         render={props => <MyComponent {...props} />}
-//         key={path}
-//       />
-//     </>
-//   );
-// };
-
-// export default PrivateRoute;

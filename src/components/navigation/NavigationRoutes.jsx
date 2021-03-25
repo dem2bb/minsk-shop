@@ -18,13 +18,13 @@ const NavigationRoutes = ({ routes, match = '' }) => {
       fallback={<Loader type="Puff" color="#00BFFF" height={100} width={100} />}
     >
       <Switch>
-        {routes.map(({ exact, path, component }) => (
-          <Route
-            exact={exact}
-            path={`${match}${path}`}
-            component={component}
-            key={path}
-          />
+        {routes.map((item) => (
+          
+            item.private
+            ? ()
+              : (<PublicRoute {} />)
+          
+          
         ))}
       </Switch>
     </Suspense>

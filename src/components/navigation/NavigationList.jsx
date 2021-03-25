@@ -1,23 +1,53 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { NavigationListContainer } from "./NavigationStyled";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { NavigationListContainer } from './NavigationStyled';
 
-const NavigationList = ({ routes, match = "" }) => {
+const NavigationList = ({ routes, match = '' }) => {
   return (
     <NavigationListContainer>
       <ul className="navigation-list">
-        {routes.map(({ name, path, exact }) => (
-          <li key={path}>
-            <NavLink
-              exact={exact}
-              to={`${match}${path}`}
-              className="navLink"
-              activeClassName="active_navLink"
-            >
-              {name}
-            </NavLink>
-          </li>
-        ))}
+        {routes.map(({ name, path, exact, isPrivate, restricted }) => {
+          return (
+            <>
+              {!isPrivate && !restricted && (
+                <li key={path}>
+                  <NavLink
+                    exact={exact}
+                    to={`${match}${path}`}
+                    className="navLink"
+                    activeClassName="active_navLink"
+                  >
+                    {name}
+                  </NavLink>
+                </li>
+              )}
+              {isPrivate && !restricted && (
+                <li key={path}>
+                  <NavLink
+                    exact={exact}
+                    to={`${match}${path}`}
+                    className="navLink"
+                    activeClassName="active_navLink"
+                  >
+                    {name}
+                  </NavLink>
+                </li>
+              )}
+              {!isPrivate && restricted && (
+                <li key={path}>
+                  <NavLink
+                    exact={exact}
+                    to={`${match}${path}`}
+                    className="navLink"
+                    activeClassName="active_navLink"
+                  >
+                    {name}
+                  </NavLink>
+                </li>
+              )}
+            </>
+          );
+        })}
       </ul>
     </NavigationListContainer>
   );
