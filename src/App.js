@@ -7,7 +7,7 @@ import dark from './themes/darkTheme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './themes/globalStyles';
 import { connect } from 'react-redux';
-import { setIsAuth } from './redux/auth/auth-actions';
+import { setIsAuth } from './redux/auth/auth-action';
 
 export const ThemeSwitcher = createContext();
 
@@ -25,7 +25,6 @@ class App extends Component {
       prevState.theme.title === 'light' ? { theme: dark } : { theme: light },
     );
   };
-
   render() {
     const { cart, theme } = this.state;
     return (

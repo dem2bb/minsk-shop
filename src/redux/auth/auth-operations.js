@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { signUp, signIn, setError } from './auth-actions';
+import { setError, signIn, signUp } from './auth-action';
 
-const signUpOperation = user => async dispatch => {
+export const signUpOperation = user => async dispatch => {
   try {
     const response = await axios.post(process.env.REACT_APP_SIGNUP_URL, {
       ...user,
@@ -13,7 +13,7 @@ const signUpOperation = user => async dispatch => {
   }
 };
 
-const signInOperation = user => async dispatch => {
+export const signInOperation = user => async dispatch => {
   try {
     const response = await axios.post(process.env.REACT_APP_SIGNIN_URL, {
       ...user,
@@ -24,5 +24,3 @@ const signInOperation = user => async dispatch => {
     dispatch(setError(error.response.data.error.message));
   }
 };
-
-export { signUpOperation, signInOperation };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ThemeSwitcher } from '../../App';
-import { signOut } from '../../redux/auth/auth-actions';
+import { signOut } from '../../redux/auth/auth-action';
 
 const Settings = ({ signOut }) => {
   return (
@@ -13,9 +13,8 @@ const Settings = ({ signOut }) => {
           </button>
         )}
       </ThemeSwitcher.Consumer>
-
       <button type="button" onClick={() => signOut()}>
-        Log out{' '}
+        Log out
       </button>
     </div>
   );

@@ -50,7 +50,7 @@ export const mainRoutes = [
     restricted: false,
   },
   {
-    name: 'Sign up',
+    name: 'Signup',
     path: '/signup',
     exact: true,
     component: lazy(() => import('../components/auth/AuthForm')),
@@ -58,7 +58,7 @@ export const mainRoutes = [
     restricted: true,
   },
   {
-    name: 'Sign in',
+    name: 'Signin',
     path: '/signin',
     exact: true,
     component: lazy(() => import('../components/auth/AuthForm')),
