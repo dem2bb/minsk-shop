@@ -6,13 +6,11 @@ export const productRoutes = [
     path: '/list',
     name: 'List',
     component: lazy(() => import('../components/productList/ProductList')),
-    private: true,
   },
   {
     exact: true,
     path: '/form',
     name: 'ADD PRODUCT',
     component: lazy(() => import('../components/productForm/ProductForm')),
-    private: true,
   },
 ];

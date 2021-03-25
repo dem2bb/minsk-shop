@@ -7,15 +7,15 @@ const PublicRoutes = ({ exact, path, component, restricted }) => {
   const isAuth = useSelector(getIsAuth);
   return (
     <>
-      {!isAuth && restricted ? (
+      {isAuth && restricted ? (
+        <Redirect to="/admin" />
+      ) : (
         <Route
           exact={exact}
           path={`${path}`}
           component={component}
           key={path}
         />
-      ) : (
-        <Redirect to="/admin" />
       )}
     </>
   );
