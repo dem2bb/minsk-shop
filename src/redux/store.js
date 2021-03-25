@@ -9,15 +9,6 @@ import {
 } from 'redux-persist';
 import { persistStore } from 'redux-persist';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
-import {
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
 
 const middleware = [
   ...getDefaultMiddleware({
