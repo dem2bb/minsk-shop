@@ -3,12 +3,15 @@ import {
   DECREMENT,
   INCREMENT,
   REMOVE_FROM_CART,
-} from "./cart-types";
+  ORDER_PRODUCTS,
+} from './cart-types';
 
 const cartReducer = (state = [], { type, payload }) => {
   switch (type) {
+    case ORDER_PRODUCTS:
+      return [];
     case ADD_TO_CART:
-      const foundedIdx = state.findIndex((item) => item.id === payload.id);
+      const foundedIdx = state.findIndex(item => item.id === payload.id);
       const foundedItem = state[foundedIdx];
       if (foundedIdx === -1) {
         return [...state, { ...payload, quantity: 1 }];
@@ -20,28 +23,28 @@ const cartReducer = (state = [], { type, payload }) => {
       ];
     case DECREMENT:
       return [
-        ...state.map((item) =>
+        ...state.map(item =>
           item.id === payload
             ? {
                 ...item,
                 quantity: item.quantity - 1,
               }
-            : item
+            : item,
         ),
       ];
     case INCREMENT:
       return [
-        ...state.map((item) =>
+        ...state.map(item =>
           item.id === payload
             ? {
                 ...item,
                 quantity: item.quantity + 1,
               }
-            : item
+            : item,
         ),
       ];
     case REMOVE_FROM_CART:
-      return [...state.filter((item) => item.id !== payload)];
+      return [...state.filter(item => item.id !== payload)];
     default:
       return state;
   }
