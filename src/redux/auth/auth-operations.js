@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setError, signIn, signUp } from './auth-actions';
+import { setError, signIn, signUp } from './auth-action';
 
 export const signUpOperation = user => async dispatch => {
   try {
@@ -9,7 +9,6 @@ export const signUpOperation = user => async dispatch => {
     });
     dispatch(signUp(response.data));
   } catch (error) {
-    console.dir(error);
     dispatch(setError(error.response.data.error.message));
   }
 };

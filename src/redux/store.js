@@ -1,9 +1,5 @@
-// import { createStore } from "redux";
-// import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from './products/root-reducer';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
-  persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -11,6 +7,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { persistStore } from 'redux-persist';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 const middleware = [
   ...getDefaultMiddleware({

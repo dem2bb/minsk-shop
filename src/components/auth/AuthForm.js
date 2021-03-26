@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
   signUpOperation,
   signInOperation,
 } from '../../redux/auth/auth-operations';
+import { connect } from 'react-redux';
 
 class AuthForm extends Component {
   state = {
@@ -11,14 +11,15 @@ class AuthForm extends Component {
     password: '',
   };
 
-  onHandleChange = evt => {
-    const { value, name } = evt.target;
-    this.setState({ [name]: value });
+  onHandleChange = event => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value,
+    });
   };
 
-  onHandleSubmit = evt => {
-    evt.preventDefault();
-
+  onHandleSubmit = event => {
+    event.preventDefault();
     this.props.location.pathname === '/signup'
       ? this.props.signUpOperation(this.state)
       : this.props.signInOperation(this.state);
@@ -29,6 +30,7 @@ class AuthForm extends Component {
     return (
       <form onSubmit={this.onHandleSubmit}>
         <label>
+          {' '}
           Email
           <input
             type="text"
@@ -38,6 +40,7 @@ class AuthForm extends Component {
           />
         </label>
         <label>
+          {' '}
           Password
           <input
             type="text"

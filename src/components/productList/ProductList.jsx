@@ -4,14 +4,16 @@ import notFoundImg from '../../images/notfound.png';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getProducts } from '../../services/productsApi';
 import Modal from '../modal/Modal.hoc';
 import { connect } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products-actions';
 import { getAllProductsOperation } from '../../redux/products/products-operations';
 import Loader from 'react-loader-spinner';
 import Filter from '../filter/Filter';
-import { loaderSelector, filteredSelector } from '../../redux/products/products-selectors';
+import {
+  loaderSelector,
+  filteredSelector,
+} from '../../redux/products/products-selectors';
 
 class ProductList extends Component {
   state = {
@@ -20,18 +22,11 @@ class ProductList extends Component {
   };
 
   componentDidMount() {
-    // getProducts().then(products => this.setState({ products }));
-
     this.props.getAllProductsOperation();
   }
 
   onDelete = event => {
     const { id } = event.currentTarget.dataset;
-    // deleteProduct(id).then(() => {
-    //   this.setState(prevState => ({
-    //     products: [...prevState.products.filter(product => product.id !== id)],
-    //   }));
-    // });
     this.props.deleteProduct(id);
     this.onClose();
   };
@@ -79,15 +74,9 @@ class ProductList extends Component {
                     <p className="product_list_text">
                       <b>Price:</b> {price}
                     </p>
-                    {/* <p className="product_list_text">
-                    <b>Description:</b> {description}
-                  </p> */}
                     <p className="product_list_text">
                       <b>Sale:</b> {sale ? 'Enabled' : 'Disabled'}
                     </p>
-                    {/* <p className="product_list_text">
-                    <b>Category:</b> {category}
-                  </p> */}
                     <div className="buttons">
                       <IconButton
                         color="primary"
