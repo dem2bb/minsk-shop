@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
-import { ThemeSwitcher } from '../../App';
+import useTheme from '../../hooks/useTheme';
 import { signOut } from '../../redux/auth/auth-action';
 
 const Settings = ({ signOut }) => {
+  const [_, toggleTheme] = useTheme();
   return (
     <div>
-      <ThemeSwitcher.Consumer>
-        {toggleTheme => (
-          <button type="button" onClick={toggleTheme}>
-            Change Theme
-          </button>
-        )}
-      </ThemeSwitcher.Consumer>
+      <button type="button" onClick={toggleTheme}>
+        Change Theme
+      </button>
       <button type="button" onClick={() => signOut()}>
         Log out
       </button>
