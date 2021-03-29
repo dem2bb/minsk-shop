@@ -9,7 +9,10 @@ const Header = ({ toggleTheme }) => {
     <HeaderContainer>
       <img className="logo" src={logo} alt="Logo" />
       <NavigationList routes={mainRoutes} />
-      <button onClick={toggleTheme}>Switch theme</button>
+      <div class="toggle">
+        <input type="checkbox" id="toggle" onClick={toggleTheme} />
+        <label for="toggle"></label>
+      </div>
     </HeaderContainer>
   );
 };

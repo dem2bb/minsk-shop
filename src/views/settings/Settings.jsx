@@ -1,24 +1,20 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useTheme from '../../hooks/useTheme';
 import { signOut } from '../../redux/auth/auth-action';
+import Profile from './Profile';
 
-const Settings = ({ signOut }) => {
+const Settings = () => {
+  const dispatch = useDispatch();
   const [_, toggleTheme] = useTheme();
   return (
     <div>
-      <button type="button" onClick={toggleTheme}>
-        Change Theme
-      </button>
-      <button type="button" onClick={() => signOut()}>
+      <Profile />
+      <button type="button" onClick={() => dispatch(signOut())}>
         Log out
       </button>
     </div>
   );
 };
 
-const mapDispatchToProps = {
-  signOut,
-};
-
-export default connect(null, mapDispatchToProps)(Settings);
+export default Settings;
